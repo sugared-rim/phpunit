@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+
+if (!ini_get('date.timezone')) {
+    ini_set('date.timezone', 'UTC');
+}
+
+/*
+ * For PHPUNIT_COMPOSER_INSTALL:
+ *   + see phpunit executable and
+ *   + see PHPUnit_Framework_TestCase::run
+ */
+foreach ([
+    __DIR__.'/../../autoload.php',
+    __DIR__.'/../vendor/autoload.php',
+    __DIR__.'/vendor/autoload.php'
+    ] as $file) {
+
+    if (file_exists($file)) {
+        define('PHPUNIT_COMPOSER_INSTALL', $file);
+
+        break;
+    }
+}
+
+unset($file);
+
+require PHPUNIT_COMPOSER_INSTALL;
+
+Schnittstabil\Sugared\PHPUnit\TextUI\Command::main();

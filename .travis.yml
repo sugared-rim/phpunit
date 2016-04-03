@@ -1,0 +1,22 @@
+language: php
+
+php:
+  - 5.6
+  - 7
+  - hhvm
+
+sudo: false
+
+install:
+  - composer install --no-interaction
+
+script:
+  - composer test
+
+after_success:
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then vendor/bin/test-reporter; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then vendor/bin/coveralls -v; fi
+
+addons:
+  code_climate:
+    repo_token: 0f8401dd474e697bec3f1f5ef8925ed972078ec09b6e7adc0b8a7ecdeb3220dc

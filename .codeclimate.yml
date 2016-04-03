@@ -1,0 +1,16 @@
+engines:
+  fixme:
+    enabled: true
+  phpcodesniffer:
+    enabled: false
+  phpmd:
+    enabled: true
+ratings:
+   paths:
+   - "src/**/*"
+   - "**.php"
+   - "**.module"
+   - "**.inc"
+exclude_paths:
+- "tests/**/*"
+- ".codeclimate.yml"
