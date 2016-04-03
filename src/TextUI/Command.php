@@ -2,11 +2,11 @@
 
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
+use function Schnittstabil\Get\getValue;
+
 use Psr\Log\LoggerInterface;
 use fool\echolog\Echolog;
-
 use Schnittstabil\ComposerExtra\ComposerExtra;
-use Schnittstabil\Get;
 
 class Command extends \PHPUnit_TextUI_Command
 {
@@ -53,21 +53,18 @@ class Command extends \PHPUnit_TextUI_Command
         $this->namespace = $namespace;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function handleArguments(array $argv)
     {
         parent::handleArguments($argv);
 
-        if (Get::value('sugaredDebug', $this->arguments, false)) {
+        if (getValue('sugaredDebug', $this->arguments, false)) {
             $this->logDebug('Parsed arguments', $this->arguments);
         }
     }
 
     protected function getConfig()
     {
-        return (new ComposerExtra($this->namespace, $this->defaultConfig))->get();
+        return (new ComposerExtra($this->namespace, $this->defaultConfig, 'presets'))->get();
     }
 
     protected function preprocessArgv(array $argv)

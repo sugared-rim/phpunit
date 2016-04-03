@@ -2,7 +2,7 @@
 
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
-use Schnittstabil\Get;
+use function Schnittstabil\Get\getValue;
 
 class Argv
 {
@@ -13,12 +13,9 @@ class Argv
         $this->config = $config;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     protected function renderWhitelist($argv)
     {
-        $src = Get::value('src', $this->config, false);
+        $src = getValue('src', $this->config, false);
 
         if (empty($src)) {
             throw new \InvalidArgumentException(
@@ -37,12 +34,9 @@ class Argv
         return $argv;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     protected function renderCoverage($argv)
     {
-        $coverage = Get::value('coverage', $this->config, false);
+        $coverage = getValue('coverage', $this->config, false);
 
         if (empty($coverage)) {
             return $argv;
@@ -64,34 +58,31 @@ class Argv
             $argv = $this->renderWhitelist($argv);
         }
 
-        if ($includesText && Get::value('sugared.coverage-text-show-uncovered-files', $this->config)) {
+        if ($includesText && getValue('sugared.coverage-text-show-uncovered-files', $this->config)) {
             $argv[] = '--sugared-coverage-text-show-uncovered-files';
         }
 
         return $argv;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function __invoke(array $argv)
     {
         $script = array_shift($argv);
 
         $argv = $this->renderCoverage($argv);
 
-        if (Get::value('sugared.debug', $this->config)) {
+        if (getValue('sugared.debug', $this->config)) {
             $argv[] = '--sugared-debug';
         }
 
-        if (Get::value('colors', $this->config)) {
+        if (getValue('colors', $this->config)) {
             $argv[] = '--colors';
         }
 
         $positionalArgs = array_filter($argv, function ($arg) { return substr($arg, 0, 1) !== '-'; });
 
         if (empty($positionalArgs)) {
-            $tests = Get::value('tests', $this->config, false);
+            $tests = getValue('tests', $this->config, false);
             if ($tests) {
                 $argv[] = $tests;
             }

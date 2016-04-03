@@ -14,8 +14,8 @@
         "fool/echolog": "^1.0",
         "phpunit/phpunit": "^5.2",
         "psr/log": "^1.0",
-        "schnittstabil/composer-extra": "^0.1.0",
-        "schnittstabil/get": "^1.7"
+        "schnittstabil/composer-extra": "^0.3.0",
+        "schnittstabil/get": "^2.0"
     },
     "require-dev": {
         "gamez/psr-testlogger": "^1.0",

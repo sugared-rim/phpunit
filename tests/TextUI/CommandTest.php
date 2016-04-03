@@ -1,9 +1,9 @@
 <?php
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
-use Gamez\Psr\Log\TestLoggerTrait;
+use function Schnittstabil\Get\getValue;
 
-use Schnittstabil\Get;
+use Gamez\Psr\Log\TestLoggerTrait;
 
 class CommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -79,6 +79,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $reflector->setAccessible(true);
         $config = $reflector->invoke($sut);
 
-        $this->assertEquals(42, Get::value('sugared.unicorns', $config));
+        $this->assertEquals(42, getValue('sugared.unicorns', $config));
     }
 }
