@@ -2,7 +2,7 @@ engines:
   fixme:
     enabled: true
   phpcodesniffer:
-    enabled: false
+    enabled: true
   phpmd:
     enabled: true
 ratings:

@@ -65,6 +65,13 @@ class Argv
         return $argv;
     }
 
+    /**
+     * Render argv array.
+     *
+     * @param array $argv
+     *
+     * @return array
+     */
     public function __invoke(array $argv)
     {
         $script = array_shift($argv);
@@ -79,7 +86,12 @@ class Argv
             $argv[] = '--colors';
         }
 
-        $positionalArgs = array_filter($argv, function ($arg) { return substr($arg, 0, 1) !== '-'; });
+        $positionalArgs = array_filter(
+            $argv,
+            function ($arg) {
+                return substr($arg, 0, 1) !== '-';
+            }
+        );
 
         if (empty($positionalArgs)) {
             $tests = getValue('tests', $this->config, false);

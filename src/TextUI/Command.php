@@ -18,6 +18,9 @@ class Command extends \PHPUnit_TextUI_Command
     ];
     protected $logger;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct(LoggerInterface $logger = null)
     {
         // @codeCoverageIgnoreStart
@@ -28,7 +31,8 @@ class Command extends \PHPUnit_TextUI_Command
 
         $this->logger = $logger;
 
-        $this->longOptions['sugared-coverage-text-show-uncovered-files'] = 'sugaredCoverageTextShowUncoveredFilesHandler';
+        $this->longOptions['sugared-coverage-text-show-uncovered-files']
+            = 'sugaredCoverageTextShowUncoveredFilesHandler';
         $this->longOptions['sugared-debug'] = 'sugaredDebugHandler';
         $this->longOptions['sugared-namespace='] = 'sugaredNamespaceHandler';
     }
@@ -53,6 +57,9 @@ class Command extends \PHPUnit_TextUI_Command
         $this->namespace = $namespace;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function handleArguments(array $argv)
     {
         parent::handleArguments($argv);
@@ -64,7 +71,11 @@ class Command extends \PHPUnit_TextUI_Command
 
     protected function getConfig()
     {
-        return (new ComposerExtra($this->namespace, $this->defaultConfig, 'presets'))->get();
+        return (new ComposerExtra(
+            $this->namespace,
+            $this->defaultConfig,
+            'presets'
+        ))->get();
     }
 
     protected function preprocessArgv(array $argv)
@@ -75,6 +86,8 @@ class Command extends \PHPUnit_TextUI_Command
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function run(array $argv, $exit = true)
