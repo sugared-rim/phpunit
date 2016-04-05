@@ -28,6 +28,17 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['./dummy', '--sugared-debug'], $sut);
     }
 
+    public function testBootstrapOptionShouldBeRendered()
+    {
+        $rnd = uniqid();
+        $argv = new Argv([
+            'bootstrap' => $rnd,
+        ]);
+        $sut = $argv(['./dummy']);
+
+        $this->assertEquals(['./dummy', '--bootstrap='.$rnd], $sut);
+    }
+
     public function testColorsOptionShouldBeRendered()
     {
         $argv = new Argv([

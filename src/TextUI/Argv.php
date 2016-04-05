@@ -86,6 +86,10 @@ class Argv
             $argv[] = '--colors';
         }
 
+        if ($bootstrap = getValue('bootstrap', $this->config)) {
+            $argv[] = '--bootstrap='.$bootstrap;
+        }
+
         $positionalArgs = array_filter(
             $argv,
             function ($arg) {

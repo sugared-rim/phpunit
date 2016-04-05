@@ -7,6 +7,7 @@ class DefaultPreset
     public static function get()
     {
         return [
+            'bootstrap' => 'vendor/autoload.php',
             'coverage' => [
                 'text' => 'php://stdout',
                 'clover' => 'build/logs/clover.xml',
