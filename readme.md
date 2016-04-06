@@ -14,10 +14,11 @@ $ composer require --dev schnittstabil/sugared-phpunit
 
 ## Usage
 
-Instead of requiring and running `phpunit` use `sugared-phpunit` - that's it, no `phpunit.xml*` needed.
+Instead of requiring and running `phpunit` use `sugared-phpunit` - that's it, no `phpunit.xml*` needed:
+
 ```json
 {
-    "name": "you/your-project",
+    ...
     "require-dev": {
         "schnittstabil/sugared-phpunit": ...
     },
@@ -29,9 +30,9 @@ Instead of requiring and running `phpunit` use `sugared-phpunit` - that's it, no
 
 ## Configuration
 
-You can configure some options by putting it in your `composer.json`.
+You may overwrite some options by putting it in your `composer.json`.
 
-Some default settings:
+Some of the default settings:
 ```json
 {
     ...
