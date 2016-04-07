@@ -1,10 +1,10 @@
-# SugaredPHPUnit [![Build Status](https://travis-ci.org/schnittstabil/sugared-phpunit.svg?branch=master)](https://travis-ci.org/schnittstabil/sugared-phpunit) [![Coverage Status](https://coveralls.io/repos/schnittstabil/sugared-phpunit/badge.svg?branch=master&service=github)](https://coveralls.io/github/schnittstabil/sugared-phpunit?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/schnittstabil/sugared-phpunit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/schnittstabil/sugared-phpunit/?branch=master) [![Code Climate](https://codeclimate.com/github/schnittstabil/sugared-phpunit/badges/gpa.svg)](https://codeclimate.com/github/schnittstabil/sugared-phpunit)
+# Sugared\PHPUnit [![Build Status](https://travis-ci.org/schnittstabil/sugared-phpunit.svg?branch=master)](https://travis-ci.org/schnittstabil/sugared-phpunit) [![Coverage Status](https://coveralls.io/repos/schnittstabil/sugared-phpunit/badge.svg?branch=master&service=github)](https://coveralls.io/github/schnittstabil/sugared-phpunit?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/schnittstabil/sugared-phpunit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/schnittstabil/sugared-phpunit/?branch=master) [![Code Climate](https://codeclimate.com/github/schnittstabil/sugared-phpunit/badges/gpa.svg)](https://codeclimate.com/github/schnittstabil/sugared-phpunit)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/d937d693-2bb7-428b-be4a-817a1fb5d9a0/big.png)](https://insight.sensiolabs.com/projects/d937d693-2bb7-428b-be4a-817a1fb5d9a0)
 
 > PHPUnit sweetened with ease :cherries:
 
-SugaredPHPUnit takes an opinionated view of testing with [PHPUnit](https://phpunit.de), it is preconfigured to get you up and running as quickly as possible.
+Sugared\PHPUnit takes an opinionated view of testing with [PHPUnit](https://phpunit.de), it is preconfigured to get you up and running as quickly as possible.
 
 ## Install
 
