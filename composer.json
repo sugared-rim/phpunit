@@ -10,6 +10,12 @@
             "email": "michael@schnittstabil.de"
         }
     ],
+    "autoload": {
+        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "tests" }
+    },
     "require": {
         "fool/echolog": "^1.0",
         "phpunit/phpunit": "^5.2",
@@ -18,28 +24,37 @@
         "schnittstabil/get": "^2.0"
     },
     "require-dev": {
+        "codeclimate/php-test-reporter": "^0.3.0",
+        "fabpot/php-cs-fixer": "^1.10",
         "gamez/psr-testlogger": "^1.0",
-        "vladahejda/phpunit-assert-exception": "^1.0",
+        "halleck45/phpmetrics": "^1.8",
+        "phpmd/phpmd": "^2.3",
         "satooshi/php-coveralls": "^1.0",
-        "codeclimate/php-test-reporter": "^0.3.0"
-    },
-    "autoload": {
-        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "src" }
-    },
-    "autoload-dev": {
-        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "tests" }
+        "squizlabs/php_codesniffer": "^2.5",
+        "vladahejda/phpunit-assert-exception": "^1.0"
     },
     "bin": [
         "sugared-phpunit"
     ],
-    "scripts": {
-        "test": "phpunit --configuration=internal_phpunit.xml"
-    },
     "extra": {
         "schnittstabil/sugared-phpunit test-namespace": {
             "sugared": {
                 "unicorns": 42
             }
         }
+    },
+    "scripts": {
+        "clean": "rm -rf build/",
+        "doc": [
+            "sugared-sami",
+            "phpmetrics --report-html build/phpmetrics/metrics.html src/"
+        ],
+        "lint": [
+            "phpcs -s --standard=PSR1,PSR2 src/ tests/",
+            "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
+            "php-cs-fixer fix --dry-run --diff src",
+            "php-cs-fixer fix --dry-run --diff tests",
+        ],
+        "test": "phpunit --configuration=internal_phpunit.xml"
     }
 }
