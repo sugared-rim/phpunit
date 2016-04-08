@@ -42,7 +42,6 @@ class Argv
             return $argv;
         }
 
-
         $includesText = false;
         $withCoverage = false;
 

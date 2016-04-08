@@ -3,7 +3,6 @@
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
 use function Schnittstabil\Get\getValue;
-
 use Psr\Log\LoggerInterface;
 use fool\echolog\Echolog;
 use Schnittstabil\ComposerExtra\ComposerExtra;

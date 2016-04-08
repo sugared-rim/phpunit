@@ -16,6 +16,12 @@
     "autoload-dev": {
         "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "tests" }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/schnittstabil/pdepend.git"
+        }
+    ],
     "require": {
         "fool/echolog": "^1.0",
         "phpunit/phpunit": "^5.2",
@@ -28,6 +34,7 @@
         "fabpot/php-cs-fixer": "^1.10",
         "gamez/psr-testlogger": "^1.0",
         "halleck45/phpmetrics": "^1.8",
+        "pdepend/pdepend": "dev-fix-namespaced-consts-and-functions as 2.0",
         "phpmd/phpmd": "^2.3",
         "satooshi/php-coveralls": "^1.0",
         "squizlabs/php_codesniffer": "^2.5",
@@ -53,8 +60,11 @@
             "phpcs -s --standard=PSR1,PSR2 src/ tests/",
             "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
             "php-cs-fixer fix --dry-run --diff src",
-            "php-cs-fixer fix --dry-run --diff tests",
+            "php-cs-fixer fix --dry-run --diff tests"
         ],
-        "test": "phpunit --configuration=internal_phpunit.xml"
+        "test": [
+            "phpunit --configuration=internal_phpunit.xml",
+            "composer lint"
+        ]
     }
 }

@@ -1,8 +1,8 @@
 <?php
+
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
 use function Schnittstabil\Get\getValue;
-
 use Gamez\Psr\Log\TestLoggerTrait;
 
 class CommandTest extends \PHPUnit_Framework_TestCase
@@ -22,7 +22,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
             ->setConstructorArgs([$this->logger])
             ->setMethods(['createRunner'])
             ->getMock();
-
 
         $command->method('createRunner')
             ->will($this->returnCallback(function () use ($command) {
@@ -48,8 +47,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $argv = [
             '-',
             '--sugared-debug',
-            'StackTest',
-            'tests/fixtures/StackTest.php',
+            'Schnittstabil\Sugared\PHPUnit\Fixtures\StackTest',
+            'tests/Fixtures/StackTest.php',
         ];
 
         $sut = $this->buildCommand();
@@ -58,7 +57,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $log = implode(PHP_EOL, $this->logger->getRecords());
         $this->assertRegexp('#Arguments:#', $log);
         $this->assertRegexp('#"--sugared-debug"#', $log);
-        $this->assertRegexp('#"tests\\\\/fixtures\\\\/StackTest.php"#', $log);
+        $this->assertRegexp('#"tests\\\\/Fixtures\\\\/StackTest.php"#', $log);
         $this->assertRegexp('#Parsed arguments:#', $log);
         $this->assertRegexp('#"sugaredDebug": true#', $log);
         $this->assertNotRegExp('/No tests executed/', $log);
@@ -69,8 +68,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $argv = [
             '-',
             '--sugared-namespace', 'schnittstabil/sugared-phpunit test-namespace',
-            'StackTest',
-            'tests/fixtures/StackTest.php',
+            'Schnittstabil\Sugared\PHPUnit\Fixtures\StackTest',
+            'tests/Fixtures/StackTest.php',
         ];
 
         $sut = $this->buildCommand();
