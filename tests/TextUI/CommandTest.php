@@ -58,6 +58,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $this->assertRegexp('#Arguments:#', $log);
         $this->assertRegexp('#"--sugared-debug"#', $log);
         $this->assertRegexp('#"tests\\\\/Fixtures\\\\/StackTest.php"#', $log);
+        $this->assertRegexp('#Config:#', $log);
         $this->assertRegexp('#Parsed arguments:#', $log);
         $this->assertRegexp('#"sugaredDebug": true#', $log);
         $this->assertNotRegExp('/No tests executed/', $log);

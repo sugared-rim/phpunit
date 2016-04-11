@@ -79,7 +79,13 @@ class Command extends \PHPUnit_TextUI_Command
 
     protected function preprocessArgv(array $argv)
     {
-        $argvRenderer = new $this->argvRendererClass($this->getConfig());
+        $config = $this->getConfig();
+
+        if (in_array('--sugared-debug', $argv)) {
+            $this->logDebug('Config', $config);
+        }
+
+        $argvRenderer = new $this->argvRendererClass($config);
 
         return $argvRenderer($argv);
     }
