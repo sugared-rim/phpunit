@@ -10,7 +10,7 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyArgvShouldReturnEmptyArgv()
     {
-        $argv = new Argv();
+        $argv = new Argv(new \stdClass());
         $sut = $argv(['./dummy']);
 
         $this->assertEquals(['./dummy'], $sut);
@@ -18,11 +18,11 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testSugaredDebugOptionShouldBeRendered()
     {
-        $argv = new Argv([
-            'sugared' => [
-                'debug' => true,
-            ],
-        ]);
+        $config = new \stdClass();
+        $config->sugared = new \stdClass();
+        $config->sugared->debug = true;
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals(['./dummy', '--sugared-debug'], $sut);
@@ -30,20 +30,21 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testBootstrapOptionShouldBeRendered()
     {
-        $rnd = uniqid();
-        $argv = new Argv([
-            'bootstrap' => $rnd,
-        ]);
+        $config = new \stdClass();
+        $config->bootstrap = uniqid();
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
-        $this->assertEquals(['./dummy', '--bootstrap='.$rnd], $sut);
+        $this->assertEquals(['./dummy', '--bootstrap='.$config->bootstrap], $sut);
     }
 
     public function testColorsOptionShouldBeRendered()
     {
-        $argv = new Argv([
-            'colors' => true,
-        ]);
+        $config = new \stdClass();
+        $config->colors = true;
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals(['./dummy', '--colors'], $sut);
@@ -51,9 +52,10 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testTestsOptionShouldBeRendered()
     {
-        $argv = new Argv([
-            'tests' => 'tests',
-        ]);
+        $config = new \stdClass();
+        $config->tests = 'tests';
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals(['./dummy', 'tests'], $sut);
@@ -61,7 +63,7 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testTestsArgumentShouldBeRendered()
     {
-        $argv = new Argv();
+        $argv = new Argv(new \stdClass());
         $sut = $argv(['./dummy', 'tests']);
 
         $this->assertEquals(['./dummy', 'tests'], $sut);
@@ -69,9 +71,10 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testTestsOptionShouldBeRewritable()
     {
-        $argv = new Argv([
-            'tests' => 'tests',
-        ]);
+        $config = new \stdClass();
+        $config->tests = 'tests';
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy', 'newTests']);
 
         $this->assertEquals(['./dummy', 'newTests'], $sut);
@@ -79,12 +82,12 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testCoverageCloverOptionShouldBeRendered()
     {
-        $argv = new Argv([
-            'coverage' => [
-                'clover' => 'build/logs/clover.xml',
-            ],
-            'src' => 'src',
-        ]);
+        $config = new \stdClass();
+        $config->src = 'src';
+        $config->coverage = new \stdClass();
+        $config->coverage->clover = 'build/logs/clover.xml';
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals([
@@ -96,11 +99,11 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testCoverageOptionsCanBeDisabled()
     {
-        $argv = new Argv([
-            'coverage' => [
-                'clover' => false,
-            ],
-        ]);
+        $config = new \stdClass();
+        $config->coverage = new \stdClass();
+        $config->coverage->clover = false;
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals(['./dummy'], $sut);
@@ -108,11 +111,11 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testCoverageWithoutSrcShouldThrowError()
     {
-        $argv = new Argv([
-            'coverage' => [
-                'clover' => 'build/logs/clover.xml',
-            ],
-        ]);
+        $config = new \stdClass();
+        $config->coverage = new \stdClass();
+        $config->coverage->clover = 'build/logs/clover.xml';
+
+        $argv = new Argv($config);
 
         $this->assertException(function () use ($argv) {
             $sut = $argv(['./dummy']);
@@ -121,12 +124,12 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testCoverageWithInvalidSrcShouldThrowError()
     {
-        $argv = new Argv([
-            'coverage' => [
-                'clover' => 'build/logs/clover.xml',
-            ],
-            'src' => uniqid(),
-        ]);
+        $config = new \stdClass();
+        $config->src = uniqid();
+        $config->coverage = new \stdClass();
+        $config->coverage->clover = 'build/logs/clover.xml';
+
+        $argv = new Argv($config);
 
         $this->assertException(function () use ($argv) {
             $sut = $argv(['./dummy']);
@@ -135,15 +138,14 @@ class ArgvTest extends \PHPUnit_Framework_TestCase
 
     public function testCoverageTextShowUncoveredFilesOptionResultShouldBeRendered()
     {
-        $argv = new Argv([
-            'coverage' => [
-                'text' => 'php://stdout',
-            ],
-            'sugared' => [
-                'coverage-text-show-uncovered-files' => true,
-            ],
-            'src' => 'src',
-        ]);
+        $config = new \stdClass();
+        $config->src = 'src';
+        $config->coverage = new \stdClass();
+        $config->coverage->text = 'php://stdout';
+        $config->sugared = new \stdClass();
+        $config->sugared->{'coverage-text-show-uncovered-files'} = true;
+
+        $argv = new Argv($config);
         $sut = $argv(['./dummy']);
 
         $this->assertEquals([

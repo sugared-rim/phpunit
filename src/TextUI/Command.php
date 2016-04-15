@@ -11,10 +11,7 @@ class Command extends \PHPUnit_TextUI_Command
 {
     protected $argvRendererClass = Argv::class;
     protected $namespace = 'schnittstabil/sugared-phpunit';
-    protected $defaultConfig = [
-        'presets' => ['Schnittstabil\\Sugared\\PHPUnit\\DefaultPreset::get'],
-        'argv' => [],
-    ];
+    protected $defaultConfig;
     protected $logger;
 
     /**
@@ -27,6 +24,9 @@ class Command extends \PHPUnit_TextUI_Command
             $logger = new Echolog();
         }
         // @codeCoverageIgnoreEnd
+
+        $this->defaultConfig = new \stdClass();
+        $this->defaultConfig->presets = ['Schnittstabil\\Sugared\\PHPUnit\\DefaultPreset::get'];
 
         $this->logger = $logger;
 

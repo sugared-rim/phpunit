@@ -6,20 +6,22 @@ class DefaultPreset
 {
     public static function get()
     {
-        return [
-            'bootstrap' => 'vendor/autoload.php',
-            'coverage' => [
-                'text' => 'php://stdout',
-                'clover' => 'build/logs/clover.xml',
-                'html' => 'build/coverage/',
-            ],
-            'sugared' => [
-                'debug' => false,
-                'coverage-text-show-uncovered-files' => true,
-            ],
-            'src' => 'src',
-            'tests' => 'tests',
-            'colors' => true,
-        ];
+        $config = new \stdClass();
+
+        $config->bootstrap = 'vendor/autoload.php';
+        $config->src = 'src';
+        $config->tests = 'tests';
+        $config->colors = true;
+
+        $config->coverage = new \stdClass();
+        $config->coverage->text = 'php://stdout';
+        $config->coverage->clover = 'build/logs/clover.xml';
+        $config->coverage->html = 'build/coverage/';
+
+        $config->sugared = new \stdClass();
+        $config->sugared->debug = false;
+        $config->sugared->{'coverage-text-show-uncovered-files'} = true;
+
+        return $config;
     }
 }
