@@ -45,11 +45,19 @@ Some of the default settings:
             "coverage": {
                 "text": "php://stdout",
                 "clover": "build/logs/clover.xml",
-                "html": "build/coverage/"
+                "html": "build/coverage-phpunit/"
             },
             "src": "src",
             "tests": "tests",
-            "colors": true
+            "colors": true,
+            "sugared": {
+                "listeners": [
+                    {
+                        "class": "JohnKary\\PHPUnit\\Listener\\SpeedTrapListener",
+                        "arguments": [{"slowThreshold": 500, "reportLength": 10}]
+                    }
+                ]
+            }
         }
     }
 }

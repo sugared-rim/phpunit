@@ -2,10 +2,10 @@
 
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
-use function Schnittstabil\Get\getValue;
 use Psr\Log\LoggerInterface;
 use fool\echolog\Echolog;
 use Schnittstabil\ComposerExtra\ComposerExtra;
+use Schnittstabil\Get\Get;
 
 class Command extends \PHPUnit_TextUI_Command
 {
@@ -13,6 +13,7 @@ class Command extends \PHPUnit_TextUI_Command
     protected $namespace = 'schnittstabil/sugared-phpunit';
     protected $defaultConfig;
     protected $logger;
+    protected $config;
 
     /**
      * {@inheritdoc}
@@ -57,24 +58,50 @@ class Command extends \PHPUnit_TextUI_Command
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    protected function addListeners()
+    {
+        foreach ((array) $this->getConfig('sugared.listeners', []) as $listener) {
+            $class = Get::value('class', $listener);
+            $listenerClass = new \ReflectionClass($class);
+            $arguments = json_decode(json_encode(Get::value('arguments', $listener, [])), true);
+
+            $this->arguments['listeners'][] = $listenerClass->newInstanceArgs($arguments);
+        }
+    }
+
+    /**
      * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function handleArguments(array $argv)
     {
         parent::handleArguments($argv);
 
-        if (getValue('sugaredDebug', $this->arguments, false)) {
+        if (Get::value('sugaredDebug', $this->arguments, false)) {
             $this->logDebug('Parsed arguments', $this->arguments);
         }
+
+        $this->addListeners();
     }
 
-    protected function getConfig()
+    protected function getConfig($path = null, $default = null)
     {
-        return (new ComposerExtra(
-            $this->namespace,
-            $this->defaultConfig,
-            'presets'
-        ))->get();
+        if ($this->config === null) {
+            $this->config = new ComposerExtra(
+                $this->namespace,
+                $this->defaultConfig,
+                'presets'
+            );
+        }
+
+        if ($path === null) {
+            $path = array();
+        }
+
+        return $this->config->get($path, $default);
     }
 
     protected function preprocessArgv(array $argv)

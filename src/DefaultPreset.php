@@ -2,6 +2,8 @@
 
 namespace Schnittstabil\Sugared\PHPUnit;
 
+use JohnKary\PHPUnit\Listener\SpeedTrapListener;
+
 class DefaultPreset
 {
     public static function get()
@@ -16,11 +18,22 @@ class DefaultPreset
         $config->coverage = new \stdClass();
         $config->coverage->text = 'php://stdout';
         $config->coverage->clover = 'build/logs/clover.xml';
-        $config->coverage->html = 'build/coverage/';
+        $config->coverage->html = 'build/coverage-phpunit/';
 
         $config->sugared = new \stdClass();
         $config->sugared->debug = false;
         $config->sugared->{'coverage-text-show-uncovered-files'} = true;
+
+        $config->sugared->listeners = [];
+
+        $speedtrap = new \stdClass();
+        $speedtrap->class = SpeedTrapListener::class;
+        $options = new \stdClass();
+        $options->slowThreshold = 500;
+        $options->reportLength = 10;
+        $speedtrap->arguments = [$options];
+
+        $config->sugared->listeners[] = $speedtrap;
 
         return $config;
     }

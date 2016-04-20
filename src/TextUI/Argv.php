@@ -2,7 +2,7 @@
 
 namespace Schnittstabil\Sugared\PHPUnit\TextUI;
 
-use function Schnittstabil\Get\getValue;
+use Schnittstabil\Get\Get;
 
 class Argv
 {
@@ -13,9 +13,12 @@ class Argv
         $this->config = $config;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function renderWhitelist($argv)
     {
-        $src = getValue('src', $this->config, false);
+        $src = Get::value('src', $this->config, false);
 
         if (empty($src)) {
             throw new \InvalidArgumentException(
@@ -34,9 +37,12 @@ class Argv
         return $argv;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function renderCoverage($argv)
     {
-        $coverage = getValue('coverage', $this->config, false);
+        $coverage = Get::value('coverage', $this->config, false);
 
         if (empty($coverage)) {
             return $argv;
@@ -57,7 +63,7 @@ class Argv
             $argv = $this->renderWhitelist($argv);
         }
 
-        if ($includesText && getValue('sugared.coverage-text-show-uncovered-files', $this->config)) {
+        if ($includesText && Get::value('sugared.coverage-text-show-uncovered-files', $this->config)) {
             $argv[] = '--sugared-coverage-text-show-uncovered-files';
         }
 
@@ -70,6 +76,8 @@ class Argv
      * @param array $argv
      *
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function __invoke(array $argv)
     {
@@ -77,15 +85,15 @@ class Argv
 
         $argv = $this->renderCoverage($argv);
 
-        if (getValue('sugared.debug', $this->config)) {
+        if (Get::value('sugared.debug', $this->config)) {
             $argv[] = '--sugared-debug';
         }
 
-        if (getValue('colors', $this->config)) {
+        if (Get::value('colors', $this->config)) {
             $argv[] = '--colors';
         }
 
-        if ($bootstrap = getValue('bootstrap', $this->config)) {
+        if ($bootstrap = Get::value('bootstrap', $this->config)) {
             $argv[] = '--bootstrap='.$bootstrap;
         }
 
@@ -97,7 +105,7 @@ class Argv
         );
 
         if (empty($positionalArgs)) {
-            $tests = getValue('tests', $this->config, false);
+            $tests = Get::value('tests', $this->config, false);
             if ($tests) {
                 $argv[] = $tests;
             }
