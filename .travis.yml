@@ -9,8 +9,9 @@ sudo: false
 
 install:
   - composer selfupdate
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer global require --update-no-dev schnittstabil/sugared-php_codesniffer:dev-master@dev; fi
   - composer install
-  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer global require codeclimate/php-test-reporter phpmd/phpmd satooshi/php-coveralls schnittstabil/sugared-php_codesniffer fabpot/php-cs-fixer; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer global require --update-no-dev codeclimate/php-test-reporter phpmd/phpmd satooshi/php-coveralls fabpot/php-cs-fixer; fi
   - export PATH=$PATH:`composer global config bin-dir --absolute`
 
 script:
