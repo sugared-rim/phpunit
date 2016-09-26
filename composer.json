@@ -57,6 +57,7 @@
         "test": [
             "schnittstabil-phpunit-starter",
             "composer lint"
-        ]
+        ],
+        "build-phar": "rm -rf vendor && composer install --no-dev && box build"
     }
 }

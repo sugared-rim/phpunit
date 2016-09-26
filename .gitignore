@@ -1,3 +1,6 @@
-build/
-composer.lock
-vendor
+/build/
+/coverage/
+/doc/
+/vendor
+/composer.lock
+/*.phar

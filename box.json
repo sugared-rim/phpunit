@@ -1,0 +1,21 @@
+{
+    "output": "sugared-phpunit-@git-version@.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "extract": false,
+    "main": "sugared-phpunit",
+    "finder": [
+        {
+            "name": ["*.php", "*.pem*"],
+            "exclude": ["Tests", "tests"],
+            "in": "vendor"
+        },
+        {
+            "in": "src"
+        }
+    ],
+    "stub": true,
+    "web": false
+}
