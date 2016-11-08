@@ -1,6 +1,6 @@
 <?php
 
-namespace Schnittstabil\Sugared\PHPUnit\TextUI;
+namespace SugaredRim\PHPUnit\TextUI;
 
 use VladaHejda\AssertException;
 

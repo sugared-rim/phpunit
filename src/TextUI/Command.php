@@ -1,6 +1,6 @@
 <?php
 
-namespace Schnittstabil\Sugared\PHPUnit\TextUI;
+namespace SugaredRim\PHPUnit\TextUI;
 
 use Psr\Log\LoggerInterface;
 use fool\echolog\Echolog;
@@ -10,7 +10,7 @@ use Schnittstabil\Get\Get;
 class Command extends \PHPUnit_TextUI_Command
 {
     protected $argvRendererClass = Argv::class;
-    protected $namespace = 'schnittstabil/sugared-phpunit';
+    protected $namespace = 'sugared-rim/phpunit';
     protected $defaultConfig;
     protected $logger;
     protected $config;
@@ -27,7 +27,7 @@ class Command extends \PHPUnit_TextUI_Command
         // @codeCoverageIgnoreEnd
 
         $this->defaultConfig = new \stdClass();
-        $this->defaultConfig->presets = ['Schnittstabil\\Sugared\\PHPUnit\\DefaultPreset::get'];
+        $this->defaultConfig->presets = ['SugaredRim\\PHPUnit\\DefaultPreset::get'];
 
         $this->logger = $logger;
 

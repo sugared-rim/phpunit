@@ -1,6 +1,6 @@
 <?php
 
-namespace Schnittstabil\Sugared\PHPUnit\TextUI;
+namespace SugaredRim\PHPUnit\TextUI;
 
 use function Schnittstabil\Get\getValue;
 use Gamez\Psr\Log\TestLoggerTrait;
@@ -47,7 +47,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $argv = [
             '-',
             '--sugared-debug',
-            'Schnittstabil\Sugared\PHPUnit\Fixtures\StackTest',
+            'SugaredRim\PHPUnit\Fixtures\StackTest',
             'tests/Fixtures/StackTest.php',
         ];
 
@@ -70,8 +70,8 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     {
         $argv = [
             '-',
-            '--sugared-namespace', 'schnittstabil/sugared-phpunit test-namespace',
-            'Schnittstabil\Sugared\PHPUnit\Fixtures\StackTest',
+            '--sugared-namespace', 'sugared-rim/phpunit test-namespace',
+            'SugaredRim\PHPUnit\Fixtures\StackTest',
             'tests/Fixtures/StackTest.php',
         ];
 

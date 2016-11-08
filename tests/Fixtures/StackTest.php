@@ -1,6 +1,6 @@
 <?php
 
-namespace Schnittstabil\Sugared\PHPUnit\Fixtures;
+namespace SugaredRim\PHPUnit\Fixtures;
 
 class StackTest extends \PHPUnit_Framework_TestCase
 {

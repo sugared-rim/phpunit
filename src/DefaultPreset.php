@@ -1,6 +1,6 @@
 <?php
 
-namespace Schnittstabil\Sugared\PHPUnit;
+namespace SugaredRim\PHPUnit;
 
 use JohnKary\PHPUnit\Listener\SpeedTrapListener;
 

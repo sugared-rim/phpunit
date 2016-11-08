@@ -29,4 +29,4 @@ unset($file);
 
 require PHPUNIT_COMPOSER_INSTALL;
 
-Schnittstabil\Sugared\PHPUnit\TextUI\Command::main();
+SugaredRim\PHPUnit\TextUI\Command::main();

@@ -1,9 +1,9 @@
 {
-    "name": "schnittstabil/sugared-phpunit",
+    "name": "sugared-rim/phpunit",
     "type": "library",
     "description": "PHPUnit sweetened with ease",
     "license": "MIT",
-    "keywords": ["sugared", "preconfigured", "phpunit", "testing"],
+    "keywords": ["sugared", "preconfigured", "phpunit", "testing", "sugared-rim"],
     "authors": [
         {
             "name": "Michael Mayer",
@@ -11,10 +11,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "src" }
+        "psr-4": { "SugaredRim\\PHPUnit\\": "src" }
     },
     "autoload-dev": {
-        "psr-4": { "Schnittstabil\\Sugared\\PHPUnit\\": "tests" }
+        "psr-4": { "SugaredRim\\PHPUnit\\": "tests" }
     },
     "require": {
         "fool/echolog": "^1.0",
@@ -29,10 +29,10 @@
         "vladahejda/phpunit-assert-exception": "^1.0"
     },
     "bin": [
-        "sugared-phpunit"
+        "sugared-rim-phpunit"
     ],
     "extra": {
-        "schnittstabil/sugared-phpunit test-namespace": {
+        "sugared-rim/phpunit test-namespace": {
             "sugared": {
                 "unicorns": 42
             }
