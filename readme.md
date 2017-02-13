@@ -52,10 +52,6 @@ Some of the default settings:
             "colors": true,
             "sugared": {
                 "listeners": [
-                    {
-                        "class": "JohnKary\\PHPUnit\\Listener\\SpeedTrapListener",
-                        "arguments": [{"slowThreshold": 500, "reportLength": 10}]
-                    }
                 ]
             }
         }
@@ -74,6 +70,30 @@ The tests directory.
 ### coverage
 
 See [Command-Line Options](https://phpunit.de/manual/current/en/textui.html#textui.clioptions) for details.
+
+### Example: Add SpeedTrapListener
+
+```
+$ composer require --dev johnkary/phpunit-speedtrap
+```
+
+```json
+{
+    ...
+    "extra": {
+        "sugared-rim/phpunit": {
+            "sugared": {
+                "listeners": [
+                    {
+                        "class": "JohnKary\\PHPUnit\\Listener\\SpeedTrapListener",
+                        "arguments": [{"slowThreshold": 500, "reportLength": 10}]
+                    }
+                ]
+            }
+        }
+    }
+}
+```
 
 ## License
 

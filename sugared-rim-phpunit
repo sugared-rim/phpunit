@@ -29,4 +29,8 @@ unset($file);
 
 require PHPUNIT_COMPOSER_INSTALL;
 
+if (!class_exists(\PHPUnit\TextUI\Command::class)) {
+    class_alias(\PHPUnit_TextUI_Command::class, \PHPUnit\TextUI\Command::class);
+}
+
 SugaredRim\PHPUnit\TextUI\Command::main();

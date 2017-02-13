@@ -20,13 +20,11 @@
         "fool/echolog": "^1.0",
         "phpunit/phpunit": "^5.0|^6.0",
         "schnittstabil/composer-extra": "^2.0",
-        "schnittstabil/get": "^2.0",
-        "johnkary/phpunit-speedtrap": "^1.0"
+        "schnittstabil/get": "^2.0"
     },
     "require-dev": {
         "gamez/psr-testlogger": "^1.0",
-        "schnittstabil/phpunit-starter": "^6.0",
-        "vladahejda/phpunit-assert-exception": "^1.0"
+        "schnittstabil/phpunit-starter": "^6.0"
     },
     "bin": [
         "sugared-rim-phpunit"
@@ -35,6 +33,16 @@
         "sugared-rim/phpunit test-namespace": {
             "sugared": {
                 "unicorns": 42
+            }
+        },
+        "sugared-rim/phpunit test-speedtrap": {
+            "sugared": {
+                "listeners": [
+                    {
+                        "class": "JohnKary\\PHPUnit\\Listener\\SpeedTrapListener",
+                        "arguments": [{"slowThreshold": 500, "reportLength": 10}]
+                    }
+                ]
             }
         }
     },
@@ -48,10 +56,12 @@
             "sugared-rim-cs"
         ],
         "test": [
+            "./sugared-rim-phpunit --help",
             "schnittstabil-phpunit-starter",
             "composer lint"
         ],
         "travis": [
+            "./sugared-rim-phpunit --help",
             "schnittstabil-phpunit-starter"
         ]
     }

@@ -2,12 +2,11 @@
 
 namespace SugaredRim\PHPUnit\TextUI;
 
-use VladaHejda\AssertException;
-
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class ArgvTest extends \PHPUnit\Framework\TestCase
 {
-    use AssertException;
-
     public function testEmptyArgvShouldReturnEmptyArgv()
     {
         $argv = new Argv(new \stdClass());
@@ -117,9 +116,9 @@ class ArgvTest extends \PHPUnit\Framework\TestCase
 
         $argv = new Argv($config);
 
-        $this->assertException(function () use ($argv) {
-            $sut = $argv(['./dummy']);
-        }, \InvalidArgumentException::class, null, 'src');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('/src/');
+        $argv(['./dummy']);
     }
 
     public function testCoverageWithInvalidSrcShouldThrowError()
@@ -131,9 +130,9 @@ class ArgvTest extends \PHPUnit\Framework\TestCase
 
         $argv = new Argv($config);
 
-        $this->assertException(function () use ($argv) {
-            $sut = $argv(['./dummy']);
-        }, \InvalidArgumentException::class, null, 'directory could not be found');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('/directory could not be found/');
+        $argv(['./dummy']);
     }
 
     public function testCoverageTextShowUncoveredFilesOptionResultShouldBeRendered()

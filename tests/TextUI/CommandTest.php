@@ -4,6 +4,7 @@ namespace SugaredRim\PHPUnit\TextUI;
 
 use function Schnittstabil\Get\getValue;
 use Gamez\Psr\Log\TestLoggerTrait;
+use JohnKary\PHPUnit\Listener\SpeedTrapListener;
 
 class CommandTest extends \PHPUnit\Framework\TestCase
 {
@@ -29,12 +30,12 @@ class CommandTest extends \PHPUnit\Framework\TestCase
                 $reflector->setAccessible(true);
                 $arguments = $reflector->getValue($command);
 
-                $runner = $this->getMockBuilder(\PHPUnit_TextUI_TestRunner::class)
+                $runner = $this->getMockBuilder(\PHPUnit\TextUI\TestRunner::class)
                     ->setConstructorArgs([$arguments['loader']])
                     ->setMethods(['doRun'])
                     ->getMock();
 
-                $runner->method('doRun')->willReturn(new \PHPUnit_Framework_TestResult());
+                $runner->method('doRun')->willReturn(new \PHPUnit\Framework\TestResult());
 
                 return $runner;
             }));
@@ -82,5 +83,29 @@ class CommandTest extends \PHPUnit\Framework\TestCase
         $config = $reflector->invoke($sut);
 
         $this->assertEquals(42, getValue('sugared.unicorns', $config));
+    }
+
+    public function testSpeedTrapListenerExample()
+    {
+        if (!class_exists(SpeedTrapListener::class)) {
+            $this->markTestSkipped('SpeedTrapListener is not available.');
+
+            return;
+        }
+
+        $argv = [
+            '-',
+            '--sugared-namespace', 'sugared-rim/phpunit test-speedtrap',
+            'SugaredRim\PHPUnit\Fixtures\StackTest',
+            'tests/Fixtures/StackTest.php',
+        ];
+
+        $sut = $this->buildCommand();
+        $sut->handleArguments($argv);
+        $reflector = new \ReflectionProperty(get_class($sut), 'arguments');
+        $reflector->setAccessible(true);
+        $arguments = $reflector->getValue($sut);
+
+        $this->assertInstanceOf(SpeedTrapListener::class, getValue('listeners.0', $arguments));
     }
 }
