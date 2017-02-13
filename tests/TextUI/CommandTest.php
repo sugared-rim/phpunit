@@ -5,7 +5,7 @@ namespace SugaredRim\PHPUnit\TextUI;
 use function Schnittstabil\Get\getValue;
 use Gamez\Psr\Log\TestLoggerTrait;
 
-class CommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends \PHPUnit\Framework\TestCase
 {
     use TestLoggerTrait;
 

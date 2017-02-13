@@ -7,7 +7,7 @@ use fool\echolog\Echolog;
 use Schnittstabil\ComposerExtra\ComposerExtra;
 use Schnittstabil\Get\Get;
 
-class Command extends \PHPUnit_TextUI_Command
+class Command extends \PHPUnit\TextUI\Command
 {
     protected $argvRendererClass = Argv::class;
     protected $namespace = 'sugared-rim/phpunit';

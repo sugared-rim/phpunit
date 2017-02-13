@@ -4,7 +4,7 @@ namespace SugaredRim\PHPUnit\TextUI;
 
 use VladaHejda\AssertException;
 
-class ArgvTest extends \PHPUnit_Framework_TestCase
+class ArgvTest extends \PHPUnit\Framework\TestCase
 {
     use AssertException;
 

@@ -18,14 +18,14 @@
     },
     "require": {
         "fool/echolog": "^1.0",
-        "phpunit/phpunit": "^5.2",
-        "schnittstabil/composer-extra": "^1.0",
+        "phpunit/phpunit": "^5.0|^6.0",
+        "schnittstabil/composer-extra": "^2.0",
         "schnittstabil/get": "^2.0",
         "johnkary/phpunit-speedtrap": "^1.0"
     },
     "require-dev": {
         "gamez/psr-testlogger": "^1.0",
-        "schnittstabil/phpunit-starter": "^0.1",
+        "schnittstabil/phpunit-starter": "^6.0",
         "vladahejda/phpunit-assert-exception": "^1.0"
     },
     "bin": [
@@ -41,19 +41,18 @@
     "scripts": {
         "clean": "rm -rf build/",
         "doc": [
-            "sugared-sami",
+            "sugared-rim-sami",
             "phpmetrics --report-html build/phpmetrics/metrics.html src/"
         ],
         "lint": [
-            "sugared-phpcs",
-            "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
-            "php-cs-fixer fix --dry-run --diff src",
-            "php-cs-fixer fix --dry-run --diff tests"
+            "sugared-rim-cs"
         ],
         "test": [
             "schnittstabil-phpunit-starter",
             "composer lint"
         ],
-        "travis": "schnittstabil-phpunit-starter"
+        "travis": [
+            "schnittstabil-phpunit-starter"
+        ]
     }
 }
