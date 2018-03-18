@@ -22,3 +22,7 @@ if (!class_exists(\PHPUnit\TextUI\Command::class)) {
 if (!class_exists(\PHPUnit\TextUI\TestRunner::class)) {
     class_alias(\PHPUnit_TextUI_TestRunner::class, \PHPUnit\TextUI\TestRunner::class);
 }
+
+if (!class_exists(\PHPUnit\Runner\Version::class)) {
+    class_alias(\PHPUnit_Runner_Version::class, \PHPUnit\Runner\Version::class);
+}

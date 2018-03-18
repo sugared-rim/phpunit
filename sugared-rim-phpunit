@@ -27,10 +27,14 @@ foreach ([
 
 unset($file);
 
-require PHPUNIT_COMPOSER_INSTALL;
+$loader = require PHPUNIT_COMPOSER_INSTALL;
 
 if (!class_exists(\PHPUnit\TextUI\Command::class)) {
     class_alias(\PHPUnit_TextUI_Command::class, \PHPUnit\TextUI\Command::class);
+}
+
+if (!class_exists(\PHPUnit\Runner\Version::class)) {
+    class_alias(\PHPUnit_Runner_Version::class, \PHPUnit\Runner\Version::class);
 }
 
 SugaredRim\PHPUnit\TextUI\Command::main();

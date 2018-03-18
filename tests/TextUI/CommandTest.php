@@ -3,18 +3,19 @@
 namespace SugaredRim\PHPUnit\TextUI;
 
 use function Schnittstabil\Get\getValue;
-use Gamez\Psr\Log\TestLoggerTrait;
+use Gamez\Psr\Log\TestLogger;
 use JohnKary\PHPUnit\Listener\SpeedTrapListener;
 
 class CommandTest extends \PHPUnit\Framework\TestCase
 {
-    use TestLoggerTrait;
-
+    /**
+     * @var TestLogger
+     */
     protected $logger;
 
     protected function setUp()
     {
-        $this->logger = $this->getTestLogger();
+        $this->logger = new TestLogger();
     }
 
     protected function buildCommand()
